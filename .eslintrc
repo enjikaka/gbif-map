@@ -1,0 +1,6 @@
+{
+  "extends": "tidal",
+  "env": {
+    "browser": true
+  }
+}

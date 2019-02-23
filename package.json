@@ -1,0 +1,34 @@
+{
+  "name": "gbif-map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "module": "index.js",
+  "scripts": {
+    "test": "npm-run-all lint:types lint:js",
+    "lint:types": "tsc -p jsconfig.json --noEmit",
+    "lint:js": "eslint *.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enjikaka/gbif-map.git"
+  },
+  "keywords": [
+    "gbif",
+    "map",
+    "leaflet",
+    "web-components"
+  ],
+  "author": "Jeremy Karlsson <karlsson@jeremy.se>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/enjikaka/gbif-map/issues"
+  },
+  "homepage": "https://github.com/enjikaka/gbif-map#readme",
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "eslint-config-tidal": "^1.2.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^3.3.3333"
+  }
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  obj-viewer {
+    width: 500px;
+    height: 350px;
+    margin: 1rem;
+  }
+  </style>
+</head>
+<body>
+  <h1>&#x3C;gbif-map&#x3E;</h1>
+
+  <section>
+    <h2></h2>
+    <!--<gbif-map></gbif-map>-->
+    <pre><code></code></pre>
+  </section>
+
+  <script src="https://unpkg.com/gbif-map/index.js?module" type="module"></script>
+  <script>
+  const preElements = [...document.querySelectorAll('pre')];
+
+  preElements.forEach(preElement => {
+    const objViewer = preElement.parentElement.children[1];
+
+    preElement.querySelector('code').innerText = objViewer.outerHTML;
+  });
+  </script>
+</body>
+</html>
