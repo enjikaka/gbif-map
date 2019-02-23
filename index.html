@@ -48,7 +48,7 @@
   const preElements = [...document.querySelectorAll('pre')];
 
   preElements.forEach(preElement => {
-    const objViewer = preElement.parentElement.children[1];
+    const objViewer = preElement.parentElement.children[2];
 
     preElement.querySelector('code').innerText = objViewer.outerHTML;
   });
