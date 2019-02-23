@@ -8,7 +8,7 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
-  obj-viewer {
+  gbif-map {
     width: 500px;
     height: 350px;
     margin: 1rem;
@@ -19,12 +19,31 @@
   <h1>&#x3C;gbif-map&#x3E;</h1>
 
   <section>
-    <h2></h2>
-    <!--<gbif-map></gbif-map>-->
+    <h2>Achillea millefolium in Scandinavia</h2>
+    <p>controls disabled, purpleHeat.point style</p>
+    <gbif-map
+      gbif-id="3120060"
+      gbif-style="purpleHeat.point"
+      center-latitude="60.759358"
+      center-longitude="13.614927"
+    ></gbif-map>
     <pre><code></code></pre>
   </section>
 
-  <script src="https://unpkg.com/gbif-map/index.js?module" type="module"></script>
+  <section>
+    <h2>Hypericum perforatum in Scandinavia</h2>
+    <p>controls enabled, orange.marker style</p>
+    <gbif-map
+      gbif-id="3120060"
+      gbif-style="orange.marker"
+      center-latitude="60.759358"
+      center-longitude="13.614927"
+      controls
+    ></gbif-map>
+    <pre><code></code></pre>
+  </section>
+
+  <script src="index.js" type="module"></script>
   <script>
   const preElements = [...document.querySelectorAll('pre')];
 
