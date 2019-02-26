@@ -11,11 +11,11 @@ async function getGBIFIDFromQuery (q) {
     .filter(item => !item.synonym)
     .sort((a, b) => {
       if (a.status === 'ACCEPTED') {
-        return 1;
+        return -1;
       }
 
       if (b.status === 'ACCEPTED') {
-        return -1;
+        return 1;
       }
 
       return 0;
@@ -79,7 +79,12 @@ class GBIFMap extends HTMLElement {
     }
 
     if (gbifQuery) {
-      gbifId = await getGBIFIDFromQuery(gbifQuery);
+      try {
+        gbifId = await getGBIFIDFromQuery(gbifQuery);
+        this.setAttribute('gbif-id', gbifId);
+      } catch (e) {
+        console.log('Could not find species from query...');
+      }
     }
 
     if (!gbifId) {
