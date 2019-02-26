@@ -21,7 +21,7 @@ async function getGBIFIDFromQuery (q) {
       return 0;
     });
 
-  return results[0];
+  return results[0].key;
 }
 
 class GBIFMap extends HTMLElement {
