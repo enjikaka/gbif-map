@@ -1,6 +1,29 @@
 // @ts-ignore
 import * as L from 'https://unpkg.com/leaflet@1.4.0/dist/leaflet-src.esm.js';
 
+async function getGBIFIDFromQuery (q) {
+  const urlEncodedQuery = encodeURIComponent(q);
+  const response = await fetch('http://api.gbif.org/v1/species/suggest?q=' + urlEncodedQuery);
+  const json = await response.json();
+
+  const results = json
+    .filter(item => item.rank === 'SPECIES')
+    .filter(item => !item.synonym)
+    .sort((a, b) => {
+      if (a.status === 'ACCEPTED') {
+        return 1;
+      }
+
+      if (b.status === 'ACCEPTED') {
+        return -1;
+      }
+
+      return 0;
+    });
+
+  return results[0];
+}
+
 class GBIFMap extends HTMLElement {
   async connectedCallback () {
     this.sDOM = this.attachShadow({ mode: 'closed' });
@@ -43,7 +66,8 @@ class GBIFMap extends HTMLElement {
 
     const mapWrapperElement = this.sDOM.querySelector('#map');
 
-    const gbifId = this.getAttribute('gbif-id');
+    let gbifId = this.getAttribute('gbif-id');
+    const gbifQuery = this.getAttribute('gbif-query');
     const gbifStyle = this.getAttribute('gbif-style') || 'purpleHeat.point';
     const latitude = parseFloat(this.getAttribute('center-latitude'));
     const longitude = parseFloat(this.getAttribute('center-longitude'));
@@ -52,6 +76,14 @@ class GBIFMap extends HTMLElement {
 
     if (!enableControls) {
       this.classList.add('map--no-controls');
+    }
+
+    if (gbifQuery) {
+      gbifId = await getGBIFIDFromQuery(gbifQuery);
+    }
+
+    if (!gbifId) {
+      throw new Error('No GBIF id.');
     }
 
     const map = L.map(mapWrapperElement).setView([latitude, longitude], zoom);
