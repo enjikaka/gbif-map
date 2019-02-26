@@ -3,7 +3,7 @@ import * as L from 'https://unpkg.com/leaflet@1.4.0/dist/leaflet-src.esm.js';
 
 async function getGBIFIDFromQuery (q) {
   const urlEncodedQuery = encodeURIComponent(q);
-  const response = await fetch('http://api.gbif.org/v1/species/suggest?q=' + urlEncodedQuery);
+  const response = await fetch('https://api.gbif.org/v1/species/suggest?q=' + urlEncodedQuery);
   const json = await response.json();
 
   const results = json
